@@ -1,3 +1,4 @@
+import { browser } from '@wdio/globals'
 import { expect } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page.js'
 import SecurePage from '../pageobjects/secure.page.js'
@@ -10,8 +11,6 @@ describe('My Login application', () => {
         await expect(SecurePage.productPage).toBeExisting()
         await expect(SecurePage.productPage).toHaveText(
             expect.stringContaining('Swag Labs'))
-
-
 
         await LoginPage.open()
 
@@ -47,8 +46,6 @@ describe('My Login application', () => {
         await expect(SecurePage.errorpupup).toBeExisting()
         await expect(SecurePage.errorpupup).toHaveText(
             expect.stringContaining('')) 
-
-        
      
         await LoginPage.open()
 
@@ -77,6 +74,14 @@ describe('My Login application', () => {
         await expect(SecurePage.errorpupup).toBeExisting()
         await expect(SecurePage.errorpupup).toHaveText(
             expect.stringContaining(''))
+
+        await LoginPage.open()
+
+        await LoginPage.login('standard_user', 'secret_sauce')
+        await expect(SecurePage.productPage).toBeExisting()
+        await expect(SecurePage.productPage).toHaveText(
+                expect.stringContaining('Swag Labs'))
+        
     })
 })
 
